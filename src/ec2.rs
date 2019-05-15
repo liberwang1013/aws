@@ -1,9 +1,10 @@
 use rusoto_core::Region;
 use rusoto_ec2::{DescribeTagsRequest, Ec2, Ec2Client, Filter};
 use std::collections::HashMap;
-use std::fmt::Error;
 
-pub fn get_ec2_tags(instance_id: &str) -> Result<HashMap<String, String>, Error> {
+use crate::error::*;
+
+pub fn get_ec2_tags(instance_id: &str) -> Result<HashMap<String, String>> {
 
     let client = Ec2Client::new(Region::default());
 

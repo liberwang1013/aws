@@ -1,0 +1,13 @@
+[package]
+name = "aws"
+version = "0.0.1"
+authors = ["Liber Wang <liberwang1013@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+log = "0.4.6"
+rusoto_credential = "0.17.0"
+
+rusoto_core = "0.38.0"
+rusoto_s3 = "0.38.0"
+rusoto_ec2 = "0.38.0"

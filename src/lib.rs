@@ -10,4 +10,4 @@ extern crate futures;
 
 pub mod ec2;
 pub mod s3;
-mod error;
+pub mod error;

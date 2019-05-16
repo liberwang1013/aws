@@ -13,3 +13,5 @@ rusoto_s3 = "0.38.0"
 rusoto_ec2 = "0.38.0"
 
 error-chain = "0.12.1"
+
+futures = "0.1.27"

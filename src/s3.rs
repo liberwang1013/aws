@@ -4,13 +4,14 @@ use rusoto_s3::*;
 use futures::{Stream, Future};
 
 use crate::error::*;
+use crate::core::get_region;
 
 pub fn list_objects(bucket: &str, prefix: Option<String>) -> Result<Vec<String>> {
     let mut objects = Vec::<String>::new();
 
     let mut continuation_token = None;
     let _provider = rusoto_credential::ChainProvider::new();
-    let client = S3Client::new(Region::default());
+    let client = S3Client::new(get_region());
     let mut list_request = ListObjectsV2Request::default();
     list_request.bucket = bucket.to_owned();
     list_request.prefix = prefix;
@@ -32,7 +33,7 @@ pub fn list_objects(bucket: &str, prefix: Option<String>) -> Result<Vec<String>>
 }
 
 pub fn get_object(bucket: &str, object: &str) -> Result<Vec<u8>> {
-    let client = S3Client::new(Region::default());
+    let client = S3Client::new(get_region());
 
     let mut get_request = GetObjectRequest::default();
     get_request.bucket = bucket.to_owned();

@@ -1,7 +1,6 @@
 use rusoto_core::Region;
 
 use std::env;
-use std::net::Shutdown::Read;
 
 const AWS_CUSTOM_REGION: &str = "AWS_CUSTOM_REGION";
 const AWS_CUSTOM_ENDPOINT: &str = "AWS_CUSTOM_ENDPOINT";

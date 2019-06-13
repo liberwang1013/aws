@@ -43,7 +43,7 @@ pub fn get_object(bucket: &str, object: &str) -> Result<Vec<u8>> {
 
     if let Some(stream) = output.body {
         let body = stream.concat2().wait()?;
-        return Ok(body);
+        return Ok(body.to_vec());
     }
 
     return Err(ErrorKind::NoObjectError.into());

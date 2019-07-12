@@ -6,7 +6,7 @@ use crate::error::*;
 
 pub fn get_ec2_tags(instance_id: &str) -> Result<HashMap<String, String>> {
 
-    let client = Ec2Client::new(Region::default());
+    let client = Ec2Client::new(Region::ApEast1);
 
     let mut next_token = None;
 

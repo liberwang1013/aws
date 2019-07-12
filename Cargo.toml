@@ -6,11 +6,11 @@ edition = "2018"
 
 [dependencies]
 log = "0.4.6"
-rusoto_credential = "0.17.0"
+rusoto_credential = "0.40.0"
 
-rusoto_core = "0.39.0"
-rusoto_s3 = "0.39.0"
-rusoto_ec2 = "0.39.0"
+rusoto_core = "0.40.0"
+rusoto_s3 = "0.40.0"
+rusoto_ec2 = "0.40.0"
 
 error-chain = "0.12.1"
 

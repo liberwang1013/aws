@@ -11,7 +11,7 @@ rusoto_credential = "0.40.0"
 rusoto_core = "0.40.0"
 rusoto_s3 = "0.40.0"
 rusoto_ec2 = "0.40.0"
-
+rusoto_logs = "0.40.0"
 error-chain = "0.12.1"
 
 futures = "0.1.27"

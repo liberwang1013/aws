@@ -5,7 +5,6 @@ pub fn describe_log_groups(prefix: &str) -> Result<Vec<String>> {
     let client = CloudWatchLogsClient::new(rusoto_core::Region::default());
     let mut input = DescribeLogGroupsRequest::default();
     input.log_group_name_prefix = Some(String::from(prefix));
-    input.limit = Some(2);
     input.next_token = None;
     let mut groups = Vec::<String>::new();
     loop {

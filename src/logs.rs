@@ -20,3 +20,22 @@ pub fn describe_log_groups(prefix: &str) -> Result<Vec<String>> {
     }
     return Ok(groups);
 }
+
+pub fn create_export_task(log_group_name: &str,
+                          from: i64,
+                          to: i64,
+                          destination: &str,
+                          destination_prefix: &str)
+                          -> Result<String> {
+    let client = CloudWatchLogsClient::new(rusoto_core::Region::default());
+
+    let mut input = CreateExportTaskRequest::default();
+    input.destination        = String::from(destination);
+    input.destination_prefix = Some(String::from(destination_prefix));
+    input.log_group_name     = String::from(log_group_name);
+    input.from               = from;
+    input.to                 = to;
+
+    let rsp = client.create_export_task(input).sync()?;
+    return Ok(rsp.task_id.unwrap());
+}

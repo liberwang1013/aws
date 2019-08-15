@@ -1,10 +1,12 @@
-
 error_chain! {
     foreign_links {
         ListObjectsV2Error(rusoto_core::RusotoError<rusoto_s3::ListObjectsV2Error>);
         GetObjectError(rusoto_core::RusotoError<rusoto_s3::GetObjectError>);
 
         DescribeTagsError(rusoto_core::RusotoError<rusoto_ec2::DescribeTagsError>);
+
+        DescribeLogGroupsError(rusoto_core::RusotoError<rusoto_logs::DescribeLogGroupsError>);
+        CreateExportTaskError(rusoto_core::RusotoError<rusoto_logs::CreateExportTaskError>);
         IoError(std::io::Error);
     }
 

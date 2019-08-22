@@ -7,6 +7,7 @@ error_chain! {
 
         DescribeLogGroupsError(rusoto_core::RusotoError<rusoto_logs::DescribeLogGroupsError>);
         CreateExportTaskError(rusoto_core::RusotoError<rusoto_logs::CreateExportTaskError>);
+        DescribeExportTasksError(rusoto_core::RusotoError<rusoto_logs::DescribeExportTasksError>);
         IoError(std::io::Error);
     }
 

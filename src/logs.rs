@@ -1,5 +1,11 @@
 use rusoto_logs::*;
 use crate::error::Result;
+use futures::prelude::*;
+
+pub enum ExportTaskStatus {
+    COMPLETED,
+    PENDING,
+}
 
 pub fn describe_log_groups(prefix: &str) -> Result<Vec<String>> {
     let client = CloudWatchLogsClient::new(rusoto_core::Region::default());
@@ -29,13 +35,45 @@ pub fn create_export_task(log_group_name: &str,
                           -> Result<String> {
     let client = CloudWatchLogsClient::new(rusoto_core::Region::default());
 
-    let mut input = CreateExportTaskRequest::default();
-    input.destination        = String::from(destination);
-    input.destination_prefix = Some(String::from(destination_prefix));
-    input.log_group_name     = String::from(log_group_name);
-    input.from               = from;
-    input.to                 = to;
+    let input = CreateExportTaskRequest{
+        destination: String::from(destination),
+        destination_prefix: Some(String::from(destination_prefix)),
+        log_group_name: String::from(log_group_name),
+        from: from,
+        to: to,
+        ..Default::default()
+    };
 
     let rsp = client.create_export_task(input).sync()?;
     return Ok(rsp.task_id.unwrap());
+}
+
+pub fn describe_export_task(id: &str) -> Result<Option<String>> {
+
+    let client = CloudWatchLogsClient::new(rusoto_core::Region::default());
+
+    let input = DescribeExportTasksRequest{
+        task_id: Some(String::from(id)),
+        ..Default::default()
+    };
+
+    let rsp = client.describe_export_tasks(input).sync()?;
+
+    match rsp.export_tasks {
+        Some(tasks) => {
+            if tasks.len() != 0 {
+                let task = tasks.first().unwrap();
+                return Ok(task.to_owned().status.unwrap().code);
+            }
+            else {
+                return Ok(None);
+            }
+        }
+
+        None => {
+            return Ok(None);
+        }
+    }
+
+    return Ok(None);
 }
